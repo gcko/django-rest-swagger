@@ -357,8 +357,8 @@ class DocumentationGenerator(object):
             if rest_framework.VERSION < '3.0.0':
                 has_many = hasattr(field, 'many') and field.many
             else:
-                from rest_framework.serializers import ListSerializer, ManyRelatedField
-                has_many = isinstance(field, (ListSerializer, ManyRelatedField))
+                from rest_framework.serializers import ListField, ManyRelatedField
+                has_many = isinstance(field, (ListField, ManyRelatedField))
 
             if isinstance(field, BaseSerializer) or has_many:
                 if isinstance(field, BaseSerializer):
