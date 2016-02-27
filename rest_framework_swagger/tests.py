@@ -650,8 +650,8 @@ class DocumentationGeneratorTest(TestCase, DocumentationGeneratorMixin):
         fields = docgen._get_serializer_fields(SomeSerializer)
 
         self.assertEqual(1, len(fields['fields']))
-        self.assertEqual("array", fields['fields']['thing2']['type'])
-        self.assertEqual("string", fields['fields']['thing2']['items']['type'])
+        self.assertEqual("array", fields['fields']['thing1']['type'])
+        self.assertEqual("string", fields['fields']['thing1']['items']['type'])
 
     def test_nested_serializer(self):
         class ASerializer(serializers.Serializer):
