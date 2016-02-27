@@ -638,7 +638,20 @@ class DocumentationGeneratorTest(TestCase, DocumentationGeneratorMixin):
         fields = docgen._get_serializer_fields(OtherSerializer)
 
         self.assertEqual(1, len(fields['fields']))
+        self.assertEqual("SomeSerializer", fields['fields']['thing2']['type'])
+
+    def test_get_serializer_fields_api_with_list_field(self):
+        class SomeSerializer(serializers.Serializer):
+            thing1 = serializers.ListField(
+                child=serializers.CharField()
+            )
+
+        docgen = self.get_documentation_generator()
+        fields = docgen._get_serializer_fields(SomeSerializer)
+
+        self.assertEqual(1, len(fields['fields']))
         self.assertEqual("array", fields['fields']['thing2']['type'])
+        self.assertEqual("string", fields['fields']['thing2']['items']['type'])
 
     def test_nested_serializer(self):
         class ASerializer(serializers.Serializer):
